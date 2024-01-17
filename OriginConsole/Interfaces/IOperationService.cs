@@ -2,11 +2,9 @@ using OriginConsole.Models;
 
 namespace OriginConsole.Interfaces;
 
-public interface IOperationRepository
+public interface IOperationService
 {
-    Task RegisterBalance(int id, decimal previousBalance);
     Task RegisterWithdraw(int id, decimal amount, decimal previousAmount);
     Task<IEnumerable<ReporteDto>> GetReporte(int id);
-    
-    
+    Task RegisterBalance(int id, decimal amount);
 }

@@ -1,21 +1,21 @@
 using OriginConsole.Interfaces;
 using OriginConsole.Models;
-using OriginConsole.Servicios;
+using OriginConsole.Services;
 using OriginConsole.Utils;
 
 namespace OriginConsole.Views;
 
 public class Retiro :IView
 {
-    private IOperationRepository _operationRepository;
+    private IOperationService _operationService;
     private readonly CuentaTarjeta _cuentaTarjeta;
-    private ICardRepository _cardRepository;
+    private ICardService _cardService;
     private Print _print;
     public Retiro(CuentaTarjeta cuentaTarjeta)
     {
         _cuentaTarjeta = cuentaTarjeta;
-        _cardRepository = new CardRepository();
-        _operationRepository = new OperationRepository();
+        _cardService = new CardService();
+        _operationService = new OperationService();
         _print = new Print(cuentaTarjeta);
     }
 
@@ -36,22 +36,12 @@ public class Retiro :IView
             }
             else
             {
-                Console.WriteLine("Entro aca");
                 var previousAmount = _cuentaTarjeta.Saldo;
-                _cuentaTarjeta.Saldo = _cuentaTarjeta.Saldo - amount;
-                Console.WriteLine(_cuentaTarjeta.Saldo);
-                Tarjeta newCard = new Tarjeta()
-                {
-                    fecha_vencimiento = _cuentaTarjeta.fecha_vencimiento,
-                    Id = _cuentaTarjeta.Id,
-                    intentos_restantes = _cuentaTarjeta.intentos_restantes,
-                    Bloqueada = _cuentaTarjeta.Bloqueada,
-                    Numero = _cuentaTarjeta.Numero,
-                    Saldo = _cuentaTarjeta.Saldo,
-                    CuentaId = _cuentaTarjeta.CuentaId
-                };
-                await _cardRepository.UpdateCard(newCard);
-                await _operationRepository.RegisterWithdraw(newCard.Id, amount, previousAmount);
+                
+                _cuentaTarjeta.Saldo -= amount;
+                var tarjeta = MapTarjeta(_cuentaTarjeta);
+                await _cardService.UpdateCard(tarjeta);
+                await _operationService.RegisterWithdraw(_cuentaTarjeta.Id, amount, previousAmount);
                 break;
             }
             
@@ -61,4 +51,22 @@ public class Retiro :IView
         
         
     }
+
+
+    private Tarjeta MapTarjeta(CuentaTarjeta cuentaTarjeta)
+    {
+        Tarjeta newCard = new Tarjeta()
+        {
+            fecha_vencimiento = cuentaTarjeta.fecha_vencimiento,
+            Id = cuentaTarjeta.Id,
+            intentos_restantes = cuentaTarjeta.intentos_restantes,
+            Bloqueada = cuentaTarjeta.Bloqueada,
+            Numero = cuentaTarjeta.Numero,
+            Saldo = cuentaTarjeta.Saldo,
+            CuentaId = cuentaTarjeta.CuentaId
+        };
+
+        return newCard;
+    } 
+    
 }

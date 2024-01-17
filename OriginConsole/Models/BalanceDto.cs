@@ -1,4 +1,4 @@
-namespace OriginConsole.Models.Dto;
+namespace OriginConsole.Models;
 
 public class BalanceDto
 {

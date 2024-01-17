@@ -1,8 +1,6 @@
-using OriginConsole.Data;
-using OriginConsole.Interfaces;
-using OriginConsole.Servicios;
 
-namespace OriginConsole.Views;
+
+namespace OriginConsole.Data;
 
 public static class Init
 {

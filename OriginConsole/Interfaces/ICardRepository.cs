@@ -1,5 +1,4 @@
 using OriginConsole.Models;
-using OriginConsole.Models.Dto;
 
 namespace OriginConsole.Interfaces;
 

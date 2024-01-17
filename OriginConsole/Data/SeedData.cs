@@ -1,5 +1,6 @@
 using System.Data.SqlClient;
 using Dapper;
+using OriginConsole.Utils;
 
 namespace OriginConsole.Data;
 
@@ -8,8 +9,8 @@ public class SeedData
     
 
     public async Task CreateDB()
-    { 
-        var connectionString = "server=localhost; user id=sa; password=reallyStrongPwd123; Encrypt=false;"; 
+    {
+        var connectionString = Configuration.ConnectionStringSetup;
         using var connection = new SqlConnection(connectionString);
       
       await connection.ExecuteAsync(@"
@@ -19,7 +20,7 @@ public class SeedData
     
     public async Task Initialize()
     {
-        var connectionString = "server=localhost; database=origin; user id=sa; password=reallyStrongPwd123; Encrypt=false;"; 
+        var connectionString = Configuration.ConnectionString; 
         using var connection = new SqlConnection(connectionString);
         
      
@@ -72,7 +73,7 @@ public class SeedData
 
     public async Task Seed()
     {
-        var connectionString = "server=localhost; database=origin; user id=sa; password=reallyStrongPwd123; Encrypt=false;";
+        var connectionString = Configuration.ConnectionString;
         using var connection = new SqlConnection(connectionString);
         var tipoOperacionData = await connection.QueryFirstOrDefaultAsync<int>(@"select * from tipo_operacion");
         

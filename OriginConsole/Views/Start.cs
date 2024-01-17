@@ -5,12 +5,12 @@ using OriginConsole.Utils;
 
 namespace OriginConsole.Views;
 
-public class Menu : IView
+public class Start : IView
 {
     private readonly ICardRepository _cardRepository;
     private string tarjeta { get; set; }
 
-    public Menu(ICardRepository cardRepository)
+    public Start(ICardRepository cardRepository)
     {
         _cardRepository = cardRepository;
     }

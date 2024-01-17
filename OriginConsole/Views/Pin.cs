@@ -1,19 +1,20 @@
 using OriginConsole.Interfaces;
 using OriginConsole.Models;
-using OriginConsole.Servicios;
+using OriginConsole.Repositories;
+using OriginConsole.Services;
 
 namespace OriginConsole.Views;
 
 public class Pin: IView
 {
     private readonly Tarjeta _creditCard;
-    private readonly IAccountRepository _accountRepository;
-    private readonly ICardRepository _cardRepository;
+    private readonly IAccountService _accountService;
+    private readonly ICardService _cardService;
     public Pin(Tarjeta creditCard)
     {
         _creditCard = creditCard;
-        _accountRepository = new AccountRepository();
-        _cardRepository = new CardRepository();
+        _accountService = new AccountService();
+        _cardService = new CardService();
     }
 
     public async Task Display()
@@ -23,29 +24,29 @@ public class Pin: IView
         {
             Console.WriteLine("Ingrese el pin");
             var pin = Console.ReadLine();
-            cuenta = await  _accountRepository.Login(pin);
+            cuenta = await  _accountService.Login(pin);
             if(cuenta is not null) break;
       
             if (cuenta is null)
             {
-                _creditCard.intentos_restantes = _creditCard.intentos_restantes - 1;
+                _creditCard.intentos_restantes -= 1;
                 if (_creditCard.intentos_restantes <= 0)
                 {
                     _creditCard.Bloqueada = 1;
-                    await _cardRepository.UpdateCard(_creditCard);
+                    await _cardService.UpdateCard(_creditCard);
                     Console.WriteLine("Cuenta bloqueada");
                     Environment.Exit(0);
                 }
-                await _cardRepository.UpdateCard(_creditCard);
+                await _cardService.UpdateCard(_creditCard);
               
-                Console.WriteLine(_creditCard);
+               
             }    
         }
 
         if (_creditCard.intentos_restantes != 4)
         {
             _creditCard.intentos_restantes = 4;
-            await _cardRepository.UpdateCard(_creditCard);
+            await _cardService.UpdateCard(_creditCard);
         }
 
         var home = new Home(cuenta);
