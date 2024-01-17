@@ -2,22 +2,13 @@ using OriginConsole.Data;
 using OriginConsole.Interfaces;
 using OriginConsole.Servicios;
 
-namespace OriginConsole.Home;
+namespace OriginConsole.Views;
 
-public class Init
+public static class Init
 {
-    private readonly ICardRepository _cardRepository;
-
-    public Init(ICardRepository cardRepository)
+   
+    public static async Task Execute()
     {
-        _cardRepository = cardRepository;
-    }
-    public  async Task Execute()
-    {
-        var menu = new Menu(_cardRepository);
-        
-        
-        
         var seed = new SeedData();
         
         try
@@ -32,7 +23,6 @@ public class Init
             throw;
         }
         
-        await menu.ShowMenu();
     }
     
 }

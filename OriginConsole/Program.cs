@@ -1,18 +1,14 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿
 
-using OriginConsole.Home;
 using OriginConsole.Interfaces;
 using OriginConsole.Servicios;
+using OriginConsole.Views;
 
+await Init.Execute();
 
 ICardRepository cardRepository = new CardRepository();
 
-var initApp = new Init(cardRepository);
-await initApp.Execute();
+var menu = new Menu(cardRepository);
+await menu.ShowMenu();
 
 
-// using var connection = new SqlConnection(connectionString);
-//
-// var result = await connection.QueryFirstOrDefaultAsync<Cuenta>(@"SELECT * from cuenta");
-
-// Console.WriteLine(result.Pin);

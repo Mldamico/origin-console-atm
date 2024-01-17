@@ -1,6 +1,6 @@
 using OriginConsole.Models;
 
-namespace OriginConsole.Home;
+namespace OriginConsole.Views;
 
 public class Home
 {

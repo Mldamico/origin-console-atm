@@ -1,19 +1,22 @@
 using OriginConsole.Interfaces;
 using OriginConsole.Models;
 using OriginConsole.Servicios;
+using OriginConsole.Utils;
 
-namespace OriginConsole.Home;
+namespace OriginConsole.Views;
 
 public class Retiro
 {
     private IOperationRepository _operationRepository;
     private readonly CuentaTarjeta _cuentaTarjeta;
     private ICardRepository _cardRepository;
+    private Print _print;
     public Retiro(CuentaTarjeta cuentaTarjeta)
     {
         _cuentaTarjeta = cuentaTarjeta;
         _cardRepository = new CardRepository();
         _operationRepository = new OperationRepository();
+        _print = new Print(cuentaTarjeta);
     }
 
     public async Task DisplayMessage()
@@ -54,25 +57,7 @@ public class Retiro
             
             
         }
-        Console.WriteLine("Que desea hacer?");
-        Console.WriteLine("1 - Atras");
-        Console.WriteLine("2 - Salir");
-        var choice = Console.ReadLine();
-        switch (choice)
-        {
-            case "1":
-                var home = new Home(_cuentaTarjeta);
-                await home.Display();
-                
-                break;
-            case "2":
-                Environment.Exit(0);
-                break;
-            
-            default:
-                Console.WriteLine("Invalid choice");
-                break;
-        }
+        await _print.ShowBackOptions();
         
         
     }

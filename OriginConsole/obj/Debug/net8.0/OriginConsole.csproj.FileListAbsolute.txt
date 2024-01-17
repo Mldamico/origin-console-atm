@@ -21,3 +21,4 @@
 /Users/matiasdamico/RiderProjects/OriginConsole/OriginConsole/obj/Debug/net8.0/OriginConsole.pdb
 /Users/matiasdamico/RiderProjects/OriginConsole/OriginConsole/obj/Debug/net8.0/OriginConsole.genruntimeconfig.cache
 /Users/matiasdamico/RiderProjects/OriginConsole/OriginConsole/obj/Debug/net8.0/ref/OriginConsole.dll
+/Users/matiasdamico/RiderProjects/OriginConsole/OriginConsole/obj/Debug/net8.0/OriginConsole.sourcelink.json

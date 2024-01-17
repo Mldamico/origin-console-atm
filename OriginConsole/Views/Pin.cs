@@ -2,7 +2,7 @@ using OriginConsole.Interfaces;
 using OriginConsole.Models;
 using OriginConsole.Servicios;
 
-namespace OriginConsole.Home;
+namespace OriginConsole.Views;
 
 public class Pin
 {

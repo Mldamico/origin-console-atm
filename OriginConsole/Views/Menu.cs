@@ -1,7 +1,7 @@
 using OriginConsole.Interfaces;
 using OriginConsole.Models;
 
-namespace OriginConsole.Home;
+namespace OriginConsole.Views;
 
 public class Menu
 {
