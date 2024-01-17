@@ -8,7 +8,7 @@ Cadena de conexion en Utils/Configuration.cs.
 Cadena de conexion utilizando sql server en un contenedor levantandolo de la siguiente manera:
 
 ```
-docker run -d --name sql_server_demo -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=reallyStrongPwd123' -p 1433:1433 mcr.microsoft.com/mssql/server:2022-latest
+docker run -d --name origin -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=reallyStrongPwd123' -p 1433:1433 mcr.microsoft.com/mssql/server:2022-latest
 ```
 
 Al iniciar la aplicacion se creara la base de datos y agregara datos de prueba en la aplicacion.
