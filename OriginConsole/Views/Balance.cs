@@ -5,7 +5,7 @@ using OriginConsole.Utils;
 
 namespace OriginConsole.Views;
 
-public class Balance
+public class Balance: IView
 {
     private IOperationRepository _operationRepository;
     private readonly CuentaTarjeta _cuentaTarjeta;
@@ -19,13 +19,14 @@ public class Balance
         _print = new Print(cuentaTarjeta);
     }
 
-    public async Task ShowBalance()
+    public async Task Display()
     {
         Console.WriteLine("El Balance es: ");
         var balance = await _cardRepository.GetBalance(_cuentaTarjeta.Id);
        
         Console.WriteLine($"La tarjeta numero: {balance.Numero} posee un saldo de ${balance.Saldo} y vence el {balance.fecha_vencimiento}");
-        await _operationRepository.RegisterBalance(_cuentaTarjeta.Id);
+        var previousBalance = balance.Saldo;
+        await _operationRepository.RegisterBalance(_cuentaTarjeta.Id, previousBalance);
 
         await _print.ShowBackOptions();
     }

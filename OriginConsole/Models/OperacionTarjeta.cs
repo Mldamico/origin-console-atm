@@ -13,6 +13,8 @@ public class OperacionTarjeta
     public int intentos_restantes { get; set; }
     public string Pin { get; set; }
     public Decimal Saldo { get; set; }
+    public Decimal saldo_previo { get; set; }
     public string Detalle { get; set; }
     public DateTime fecha_vencimiento { get; set; }
+    
 }

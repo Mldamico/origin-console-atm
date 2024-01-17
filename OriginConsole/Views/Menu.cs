@@ -1,9 +1,11 @@
+
 using OriginConsole.Interfaces;
 using OriginConsole.Models;
+using OriginConsole.Utils;
 
 namespace OriginConsole.Views;
 
-public class Menu
+public class Menu : IView
 {
     private readonly ICardRepository _cardRepository;
     private string tarjeta { get; set; }
@@ -12,7 +14,7 @@ public class Menu
     {
         _cardRepository = cardRepository;
     }
-    public async Task ShowMenu()
+    public async Task Display()
     {
         Tarjeta tarjetaEncontrada;
         while (true)
@@ -26,10 +28,13 @@ public class Menu
             }
             
         }
+        Console.WriteLine($"Tarjeta Ingresada: {StringExtensions.FormatCard(tarjetaEncontrada.Numero)}");
         var newPin = new Pin(tarjetaEncontrada);
 
-        await newPin.displayMessage();
+        await newPin.Display();
         
     }
     
 }
+
+

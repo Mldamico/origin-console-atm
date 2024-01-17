@@ -9,6 +9,6 @@ await Init.Execute();
 ICardRepository cardRepository = new CardRepository();
 
 var menu = new Menu(cardRepository);
-await menu.ShowMenu();
+await menu.Display();
 
 

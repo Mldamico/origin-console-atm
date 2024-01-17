@@ -7,4 +7,5 @@ public class Operacion
     public decimal? Monto { get; set; }
     public int OperacionId { get; set; }
     public int TarjetaId { get; set; }
+    public decimal saldo_previo { get; set; }
 }

@@ -11,15 +11,15 @@ public class Print(CuentaTarjeta cuentaTarjeta)
         Console.WriteLine("Que desea hacer?");
         Console.WriteLine("1 - Atras");
         Console.WriteLine("2 - Salir");
-        var choice = Console.ReadLine();
-        switch (choice)
+        var choice  = Console.ReadKey();
+        Console.WriteLine("");
+        switch (choice.Key)
         {
-            case "1":
+            case ConsoleKey.D1:
                 var home = new Home(cuentaTarjeta);
                 await home.Display();
-                
                 break;
-            case "2":
+            case ConsoleKey.D2:
                 Environment.Exit(0);
                 break;
             

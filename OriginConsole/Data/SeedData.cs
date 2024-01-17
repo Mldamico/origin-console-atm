@@ -60,6 +60,7 @@ public class SeedData
                monto        DECIMAL (18, 2) NULL,
                tipo_operacion_id INT             NOT NULL,
                tarjeta_id   INT             NOT NULL,
+               saldo_previo DECIMAL(18, 2) DEFAULT 0 NOT NULL
                CONSTRAINT PK_operacion PRIMARY KEY CLUSTERED (id ASC),
                CONSTRAINT FK_operacion_tarjeta FOREIGN KEY (tarjeta_id) REFERENCES tarjeta (id),
                CONSTRAINT FK_operacion_tipo_operacion FOREIGN KEY (tipo_operacion_id) REFERENCES tipo_operacion (id)
@@ -100,8 +101,8 @@ public class SeedData
         var operacionesData = await connection.QueryFirstOrDefaultAsync<int>(@"select * from operacion");
         if (operacionesData == 0)
         {
-            await connection.ExecuteAsync(@"INSERT INTO operacion (fecha, monto, tipo_operacion_id, tarjeta_id) values(@fecha, @monto, @tipo_operacion_id, @tarjeta_id);", new {fecha = DateTime.Today, monto=100.00, tipo_operacion_id= 2, tarjeta_id=1});
-            await connection.ExecuteAsync(@"INSERT INTO operacion (fecha, tipo_operacion_id, tarjeta_id) values(@fecha, @tipo_operacion_id, @tarjeta_id);", new {fecha = DateTime.Today, tipo_operacion_id= 1, tarjeta_id=1});
+            await connection.ExecuteAsync(@"INSERT INTO operacion (fecha, monto, tipo_operacion_id, tarjeta_id, saldo_previo) values(@fecha, @monto, @tipo_operacion_id, @tarjeta_id, @saldo_previo);", new {fecha = DateTime.Today, monto=100.00, tipo_operacion_id= 2, tarjeta_id=1, saldo_previo=5100.00});
+            await connection.ExecuteAsync(@"INSERT INTO operacion (fecha, tipo_operacion_id, tarjeta_id, saldo_previo) values(@fecha, @tipo_operacion_id, @tarjeta_id, @saldo_previo);", new {fecha = DateTime.Today, tipo_operacion_id= 1, tarjeta_id=1, saldo_previo= 5000});
         }
     }
 }

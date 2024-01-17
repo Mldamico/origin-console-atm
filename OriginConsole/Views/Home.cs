@@ -20,24 +20,24 @@ public class Home
 
         while (true)
         {
-            string choice  = Console.ReadLine();
-            
-            switch(choice)
+            var choice  = Console.ReadKey();
+            Console.WriteLine("");
+            switch(choice.Key)
             {
-                case "1":
+                case ConsoleKey.D1:
                     var balance = new Balance(_cuentaTarjeta);
-                    await balance.ShowBalance();
+                    await balance.Display();
                     break;
-                case "2":
+                case ConsoleKey.D2:
                     var retiro = new Retiro(_cuentaTarjeta);
-                    await retiro.DisplayMessage();
+                    await retiro.Display();
                     break;
-                case "3":
+                case ConsoleKey.D3:
                     var reporte = new Reporte(_cuentaTarjeta);
                     await reporte.Display();
                     break;
-                case "4":
-                    Exit();
+                case ConsoleKey.D4:
+                    Environment.Exit(0);
                     break;
                 default:
                     Console.WriteLine("Invalid");
@@ -46,9 +46,5 @@ public class Home
             };
         }
     }
-
-    public void Exit()
-    {
-        Environment.Exit(0);
-    }
+    
 }

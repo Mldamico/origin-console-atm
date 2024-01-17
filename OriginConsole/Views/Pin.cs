@@ -4,7 +4,7 @@ using OriginConsole.Servicios;
 
 namespace OriginConsole.Views;
 
-public class Pin
+public class Pin: IView
 {
     private readonly Tarjeta _creditCard;
     private readonly IAccountRepository _accountRepository;
@@ -16,7 +16,7 @@ public class Pin
         _cardRepository = new CardRepository();
     }
 
-    public async Task displayMessage()
+    public async Task Display()
     {
         CuentaTarjeta? cuenta;
         while (true)

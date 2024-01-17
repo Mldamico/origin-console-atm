@@ -5,7 +5,7 @@ using OriginConsole.Utils;
 
 namespace OriginConsole.Views;
 
-public class Retiro
+public class Retiro :IView
 {
     private IOperationRepository _operationRepository;
     private readonly CuentaTarjeta _cuentaTarjeta;
@@ -19,11 +19,10 @@ public class Retiro
         _print = new Print(cuentaTarjeta);
     }
 
-    public async Task DisplayMessage()
+    public async Task Display()
     {
         Console.WriteLine($"Cuanto desea retirar. Puede un maximo de ${_cuentaTarjeta.Saldo}");
         
-
         while (true)
         {
             decimal amount = Decimal.Parse(Console.ReadLine());
@@ -38,6 +37,7 @@ public class Retiro
             else
             {
                 Console.WriteLine("Entro aca");
+                var previousAmount = _cuentaTarjeta.Saldo;
                 _cuentaTarjeta.Saldo = _cuentaTarjeta.Saldo - amount;
                 Console.WriteLine(_cuentaTarjeta.Saldo);
                 Tarjeta newCard = new Tarjeta()
@@ -51,7 +51,7 @@ public class Retiro
                     CuentaId = _cuentaTarjeta.CuentaId
                 };
                 await _cardRepository.UpdateCard(newCard);
-                await _operationRepository.RegisterWithdraw(newCard.Id, amount);
+                await _operationRepository.RegisterWithdraw(newCard.Id, amount, previousAmount);
                 break;
             }
             

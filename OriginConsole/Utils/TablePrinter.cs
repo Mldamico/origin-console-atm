@@ -19,7 +19,7 @@ public static class TablePrinter
         {
             foreach (var property in properties)
             {
-                Console.Write($"{{0,-{columnWidth}}}|", property.GetValue(item));
+                Console.Write($"{{0,{columnWidth}}}|", property.GetValue(item));
             }
             Console.WriteLine();
         }

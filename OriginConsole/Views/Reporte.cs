@@ -5,7 +5,7 @@ using OriginConsole.Utils;
 
 namespace OriginConsole.Views;
 
-public class Reporte
+public class Reporte: IView
 {
     private IOperationRepository _operationRepository;
     private readonly CuentaTarjeta _cuentaTarjeta;
