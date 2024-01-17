@@ -25,7 +25,13 @@ public class Retiro :IView
         
         while (true)
         {
-            decimal amount = Decimal.Parse(Console.ReadLine());
+            string value = Console.ReadLine();
+            if (string.IsNullOrEmpty(value))
+            {
+                value = "0";
+            }
+            decimal amount = Decimal.Parse(value);
+            
             if (amount < 0)
             {
                 amount = 0;
